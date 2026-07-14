@@ -1,0 +1,262 @@
+/* =========================================
+   卦山藍 Guashan Blue — Design Tokens
+   ========================================= */
+:root{
+  --bg-paper:      #F1F0EA;
+  --bg-card:       #FFFFFF;
+  --ink:           #262A22;
+  --ink-soft:      #565B4E;
+  --indigo:        #33415C;   /* 藍莓果皮 */
+  --indigo-dark:   #232E42;
+  --plum:          #5B3357;   /* 熟成果實酒紫 */
+  --sage:          #7C8A6B;   /* 葉子 */
+  --mist:          #DCE2E0;   /* 果霜霧灰藍 */
+  --mist-line:      rgba(38,42,34,0.12);
+
+  --font-display: 'Noto Serif TC', serif;
+  --font-body:    'Noto Sans TC', sans-serif;
+
+  --radius: 4px;
+  --max-width: 1120px;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  background: var(--bg-paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,h2,h3{
+  font-family: var(--font-display);
+  color: var(--indigo-dark);
+  margin: 0 0 0.5em;
+  line-height: 1.4;
+}
+
+p{ margin: 0 0 1em; color: var(--ink-soft); }
+
+a{ color: inherit; text-decoration: none; }
+
+img{ max-width: 100%; display:block; }
+
+.eyebrow{
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  color: var(--sage);
+  text-transform: uppercase;
+  margin-bottom: 0.9em;
+}
+.center{ text-align:center; margin-left:auto; margin-right:auto; }
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-block;
+  padding: 0.9em 1.9em;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+.btn-primary{
+  background: var(--indigo);
+  color: #fff;
+}
+.btn-primary:hover{ background: var(--indigo-dark); }
+
+.btn-outline{
+  border-color: var(--indigo);
+  color: var(--indigo);
+}
+.btn-outline:hover{ background: var(--indigo); color: #fff; }
+.btn-outline.light{ border-color: rgba(255,255,255,0.6); color:#fff; }
+.btn-outline.light:hover{ background:#fff; color: var(--indigo-dark); }
+
+.btn-small{ padding: 0.6em 1.3em; font-size: 0.85rem; }
+
+/* ---------- Header ---------- */
+.site-header{
+  position: sticky; top:0; z-index: 100;
+  background: rgba(241,240,234,0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--mist-line);
+}
+.header-inner{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display:flex; align-items:center; gap: 2rem;
+}
+.logo{ display:flex; flex-direction:column; margin-right:auto; }
+.logo-en{ font-size:0.62rem; letter-spacing:0.24em; color: var(--sage); }
+.logo-zh{ font-family: var(--font-display); font-size:1.25rem; font-weight:700; color:var(--indigo-dark); }
+
+.nav{ display:flex; gap: 1.8rem; }
+.nav a{ font-size:0.92rem; color: var(--ink-soft); }
+.nav a:hover{ color: var(--indigo); }
+
+.nav-toggle{ display:none; background:none; border:none; cursor:pointer; padding:0.4rem; }
+.nav-toggle span{
+  display:block; width:22px; height:2px; margin:5px 0; background: var(--indigo-dark);
+}
+
+/* ---------- Mountain line motif ---------- */
+.mountain-line{ line-height:0; }
+.mountain-line svg{ width:100%; height:110px; display:block; }
+.mountain-line path{ fill: var(--mist); }
+.mountain-line.flip{ transform: scaleY(-1); }
+
+.divider{ line-height:0; background: var(--bg-paper); }
+.divider svg{ width:100%; height:44px; }
+.divider path{ fill:none; stroke: var(--mist-line); stroke-width:2; }
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;
+  background: linear-gradient(180deg, var(--indigo-dark) 0%, var(--indigo) 100%);
+  color:#fff;
+  padding-bottom: 5.5rem;
+  overflow:hidden;
+}
+.hero .mountain-line{ transform: scaleY(-1); }
+.hero .mountain-line path{ fill: var(--bg-paper); }
+
+.hero-inner{
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 0;
+  text-align:center;
+}
+.hero .eyebrow{ color: var(--mist); }
+.hero h1{
+  color:#fff;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom:0.6em;
+}
+.hero-sub{ color: rgba(255,255,255,0.82); font-size:1.05rem; margin-bottom:2em; }
+.hero-actions{ display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+.bloom-texture{
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1.5px);
+  background-size: 26px 26px;
+  opacity:0.5;
+}
+
+/* ---------- Story ---------- */
+.story{ padding: 5rem 1.5rem; }
+.story-inner{
+  max-width: var(--max-width);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items:center;
+}
+.image-placeholder{
+  background: var(--mist);
+  border-radius: var(--radius);
+  aspect-ratio: 4/5;
+  display:flex; align-items:center; justify-content:center;
+  color: var(--ink-soft); font-size:0.85rem;
+}
+.image-placeholder.small{ aspect-ratio: 4/3; }
+
+.story-stats{
+  display:flex; gap:2.2rem;
+  margin-top: 2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--mist-line);
+}
+.stat{ display:flex; flex-direction:column; }
+.stat-num{ font-family: var(--font-display); font-size:1.6rem; color: var(--plum); font-weight:700; }
+.stat-label{ font-size:0.8rem; color: var(--ink-soft); margin-top:0.2em; }
+
+/* ---------- Products ---------- */
+.products{ padding: 1rem 1.5rem 5rem; max-width: var(--max-width); margin:0 auto; }
+.products h2{ margin-bottom:2.2rem; }
+.product-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.product-card{
+  background: var(--bg-card);
+  padding: 1.4rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--mist-line);
+}
+.product-card h3{ font-size:1.1rem; margin-top:1rem; }
+.product-card p{ font-size:0.92rem; }
+
+/* ---------- FAQ ---------- */
+.faq{ padding: 1rem 1.5rem 5rem; max-width: 760px; margin: 0 auto; }
+.faq h2{ margin-bottom: 2.2rem; }
+.faq-item{ border-bottom: 1px solid var(--mist-line); }
+.faq-q{
+  width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 1.2rem 0; font-size:1rem; color: var(--indigo-dark); font-family: var(--font-display);
+}
+.faq-icon{ font-size:1.2rem; color: var(--sage); transition: transform 0.25s ease; }
+.faq-item.open .faq-icon{ transform: rotate(45deg); }
+.faq-a{
+  max-height:0; overflow:hidden; transition: max-height 0.3s ease;
+}
+.faq-a p{ padding-bottom:1.2rem; font-size:0.94rem; }
+
+/* ---------- CTA banner ---------- */
+.cta-banner{
+  background: var(--indigo-dark);
+  color:#fff;
+  text-align:center;
+}
+.cta-inner{ padding: 1rem 1.5rem 5rem; }
+.cta-inner h2{ color:#fff; margin-bottom:1.6rem; font-size:clamp(1.5rem,4vw,2.1rem); }
+
+/* ---------- Footer ---------- */
+.site-footer{ background: var(--indigo-dark); color: rgba(255,255,255,0.75); padding: 2.5rem 1.5rem 1.5rem; }
+.footer-inner{
+  max-width: var(--max-width); margin:0 auto;
+  display:flex; flex-wrap:wrap; gap:2rem; justify-content:space-between; align-items:flex-start;
+  padding-bottom: 1.6rem; border-bottom:1px solid rgba(255,255,255,0.12);
+}
+.footer-brand{ display:flex; flex-direction:column; }
+.footer-brand .logo-zh{ color:#fff; }
+.footer-links, .footer-contact{ display:flex; gap:1.4rem; flex-wrap:wrap; font-size:0.9rem; }
+.footer-links a:hover, .footer-contact a:hover{ color:#fff; }
+.footer-copy{ text-align:center; font-size:0.78rem; margin-top:1.4rem; color: rgba(255,255,255,0.5); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px){
+  .story-inner{ grid-template-columns:1fr; }
+  .product-grid{ grid-template-columns:1fr; }
+}
+
+@media (max-width: 680px){
+  .nav{
+    position:absolute; top:100%; left:0; right:0;
+    background: var(--bg-paper);
+    flex-direction:column;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--mist-line);
+    display:none;
+  }
+  .nav.open{ display:flex; }
+  .nav-toggle{ display:block; }
+  .header-inner .btn-small{ display:none; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .btn, .faq-icon, .faq-a{ transition:none; }
+}
