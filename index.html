@@ -55,8 +55,16 @@
 <section class="story" id="story">
   <div class="story-inner">
     <div class="story-image">
-      <div class="image-placeholder" data-image="story-image">
-        <span>果園照片預留位置</span>
+      <div class="carousel" id="storyCarousel">
+        <div class="carousel-track" id="storyCarouselTrack">
+          <div class="carousel-slide"><div class="image-placeholder"><span>果園照片 1</span></div></div>
+          <div class="carousel-slide"><div class="image-placeholder"><span>果園照片 2</span></div></div>
+          <div class="carousel-slide"><div class="image-placeholder"><span>果園照片 3</span></div></div>
+          <div class="carousel-slide"><div class="image-placeholder"><span>果園照片 4</span></div></div>
+        </div>
+        <button class="carousel-arrow prev" id="storyPrev" aria-label="上一張照片">‹</button>
+        <button class="carousel-arrow next" id="storyNext" aria-label="下一張照片">›</button>
+        <div class="carousel-dots" id="storyDots"></div>
       </div>
     </div>
     <div class="story-text">
