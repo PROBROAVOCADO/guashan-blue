@@ -4,7 +4,7 @@
 
 // ⚠️ 之後架好 GAS Web App 後，把網址貼在這裡即可自動生效
 // 範例：const GAS_URL = "https://script.google.com/macros/s/xxxxx/exec";
-const GAS_URL = ""; // 尚未設定，先留空
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxnyhzKR2JN3G1f_nosQm9M8DhsXpqKrnwFcSajrQxaNCsmSScYdek8-Ljp6Kyrcrc/exec";
 
 // 本機預設內容：GAS 還沒接上前，網站會先顯示這裡的文字/連結
 // 之後這些值都會被 Google 試算表的內容取代
