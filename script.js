@@ -10,7 +10,7 @@ const GAS_URL = "https://script.google.com/macros/s/AKfycbxnyhzKR2JN3G1f_nosQm9M
 // 之後這些值都會被 Google 試算表的內容取代
 const DEFAULT_CONTENT = {
   "hero-eyebrow": "八卦山｜藍莓園",
-  "hero-title": "山霧養出的<br>一口清甜",
+  "hero-title": "山霧養出的\n一口清甜",
   "hero-sub": "卦山藍，把八卦山的日夜溫差，種進每一顆果實裡。",
   "story-title": "在山裡，慢慢等一顆果實熟成",
   "story-body-1": "卦山藍位於八卦山區，日夜溫差與丘陵地形讓藍莓有更飽滿的甜度與香氣。我們相信好的果實需要時間，不急著催熟，也不使用不必要的化學藥劑。",
@@ -47,11 +47,13 @@ const DEFAULT_LINKS = {
 };
 
 // 將文字內容套用到頁面上所有 data-content 元素
+// 試算表儲存格裡如果用 Alt+Enter（Mac 用 Option+Enter）換行，
+// 這裡會自動把換行符號轉成網頁上的實際換行，不用打 <br> 語法
 function applyContent(content){
   document.querySelectorAll("[data-content]").forEach(el => {
     const key = el.getAttribute("data-content");
     if (content[key] !== undefined) {
-      el.innerHTML = content[key];
+      el.innerHTML = content[key].replace(/\n/g, "<br>");
     }
   });
 }
