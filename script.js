@@ -4,7 +4,7 @@
 
 // ⚠️ 之後架好 GAS Web App 後，把網址貼在這裡即可自動生效
 // 範例：const GAS_URL = "https://script.google.com/macros/s/xxxxx/exec";
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxnyhzKR2JN3G1f_nosQm9M8DhsXpqKrnwFcSajrQxaNCsmSScYdek8-Ljp6Kyrcrc/exec";
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxnyhzKR2JN3G1f_nosQm9M8DhsXpqKrnwFcSajrQxaNCsmSScYdek8-Ljp6Kyrcrc/exec"; // 尚未設定，先留空
 
 // 本機預設內容：GAS 還沒接上前，網站會先顯示這裡的文字/連結
 // 之後這些值都會被 Google 試算表的內容取代
@@ -78,11 +78,72 @@ async function loadSiteContent(){
   try{
     const res = await fetch(GAS_URL);
     const data = await res.json();
-    if (data.content) applyContent(data.content);
+    if (data.content) {
+      applyContent(data.content);
+      if (data.content["story-images"]) {
+        const urls = data.content["story-images"].split(",").map(s => s.trim()).filter(Boolean);
+        if (urls.length > 0) setupCarousel(urls);
+      }
+    }
     if (data.links) applyLinks(data.links);
   }catch(err){
     console.warn("讀取 Google 試算表內容失敗，改用預設內容：", err);
   }
+}
+
+// 果園照片輪播
+// 之後若試算表的 story-images 欄位有填照片網址(用逗號分隔多張)，
+// 會自動把預留位置換成真實照片；沒有填就繼續顯示灰色預留框。
+function setupCarousel(imageUrls){
+  const carousel = document.getElementById("storyCarousel");
+  if (!carousel) return;
+
+  const track = document.getElementById("storyCarouselTrack");
+  const dotsWrap = document.getElementById("storyDots");
+  const prevBtn = document.getElementById("storyPrev");
+  const nextBtn = document.getElementById("storyNext");
+
+  // 如果有從試算表帶入的照片網址，就用真實照片取代預留框
+  if (imageUrls && imageUrls.length > 0){
+    track.innerHTML = imageUrls.map((url, i) =>
+      `<div class="carousel-slide"><img src="${url}" alt="卦山藍果園照片 ${i + 1}" loading="lazy"></div>`
+    ).join("");
+  }
+
+  const slides = track.querySelectorAll(".carousel-slide");
+  const total = slides.length;
+  if (total === 0) return;
+
+  let current = 0;
+  let timer = null;
+
+  dotsWrap.innerHTML = Array.from({ length: total }, (_, i) =>
+    `<button aria-label="第 ${i + 1} 張" class="${i === 0 ? "active" : ""}"></button>`
+  ).join("");
+  const dots = dotsWrap.querySelectorAll("button");
+
+  function goTo(index){
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle("active", i === current));
+  }
+
+  function startAutoplay(){
+    timer = setInterval(() => goTo(current + 1), 5000);
+  }
+  function stopAutoplay(){
+    clearInterval(timer);
+  }
+
+  prevBtn.addEventListener("click", () => { goTo(current - 1); stopAutoplay(); startAutoplay(); });
+  nextBtn.addEventListener("click", () => { goTo(current + 1); stopAutoplay(); startAutoplay(); });
+  dots.forEach((dot, i) => dot.addEventListener("click", () => { goTo(i); stopAutoplay(); startAutoplay(); }));
+
+  carousel.addEventListener("mouseenter", stopAutoplay);
+  carousel.addEventListener("mouseleave", startAutoplay);
+
+  goTo(0);
+  startAutoplay();
 }
 
 // FAQ 手風琴效果
@@ -114,6 +175,7 @@ function setupNavToggle(){
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("year").textContent = new Date().getFullYear();
+  setupCarousel(); // 先用預留框啟動輪播，確保沒接照片前也能看到輪播效果
   loadSiteContent();
   setupFAQ();
   setupNavToggle();
