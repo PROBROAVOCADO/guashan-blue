@@ -82,6 +82,21 @@ function applyLinks(links){
   });
 }
 
+// 從試算表內容中，把所有 story-image-1、story-image-2... 的欄位抓出來，
+// 依數字順序排好，回傳網址陣列給輪播使用。
+// 之後要加照片，直接在試算表 A 欄接著往下加 story-image-4、story-image-5...
+// 不用改這裡的程式碼。
+function getStoryImageUrls(content){
+  return Object.keys(content)
+    .map(key => {
+      const match = key.match(/^story-image-(\d+)$/);
+      return match ? { num: parseInt(match[1], 10), url: (content[key] || "").trim() } : null;
+    })
+    .filter(item => item && item.url !== "" && item.url !== "#")
+    .sort((a, b) => a.num - b.num)
+    .map(item => item.url);
+}
+
 // 讀取試算表內容（透過 GAS Web App 回傳的 JSON）
 // 預期格式：{ content: {...同 DEFAULT_CONTENT 的 key}, links: {...同 DEFAULT_LINKS 的 key} }
 async function loadSiteContent(){
@@ -97,10 +112,8 @@ async function loadSiteContent(){
     if (data.content) {
       applyContent(data.content);
       applyImages(data.content);
-      if (data.content["story-images"]) {
-        const urls = data.content["story-images"].split(",").map(s => s.trim()).filter(Boolean);
-        if (urls.length > 0) setupCarousel(urls);
-      }
+      const urls = getStoryImageUrls(data.content);
+      if (urls.length > 0) setupCarousel(urls);
     }
     if (data.links) applyLinks(data.links);
   }catch(err){
@@ -109,7 +122,7 @@ async function loadSiteContent(){
 }
 
 // 果園照片輪播
-// 之後若試算表的 story-images 欄位有填照片網址(用逗號分隔多張)，
+// 之後若試算表裡填了 story-image-1、story-image-2...(每列一張)，
 // 會自動把預留位置換成真實照片；沒有填就繼續顯示灰色預留框。
 function setupCarousel(imageUrls){
   const carousel = document.getElementById("storyCarousel");
