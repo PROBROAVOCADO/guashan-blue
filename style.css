@@ -295,6 +295,16 @@ img{ max-width: 100%; display:block; }
 .footer-brand .logo-zh{ color:#fff; }
 .footer-links, .footer-contact{ display:flex; gap:1.4rem; flex-wrap:wrap; font-size:0.9rem; }
 .footer-links a:hover, .footer-contact a:hover{ color:#fff; }
+
+.footer-contact{ align-items:center; gap:0.8rem; }
+.social-icon{
+  display:flex; align-items:center; justify-content:center;
+  width:38px; height:38px;
+  color:#fff; opacity:0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.social-icon svg{ width:22px; height:22px; }
+.social-icon:hover{ opacity:1; transform: translateY(-2px); color:#fff; }
 .footer-copy{ text-align:center; font-size:0.78rem; margin-top:1.4rem; color: rgba(255,255,255,0.5); }
 
 /* ---------- Responsive ---------- */
