@@ -58,6 +58,20 @@ function applyContent(content){
   });
 }
 
+// 將照片套用到頁面上所有 data-image 元素（例如產品卡片照片）
+// 試算表對應欄位如果有填照片網址，就把灰色預留框換成真實照片；
+// 沒有填就繼續顯示「商品照片」的預留框，不會壞版。
+function applyImages(content){
+  document.querySelectorAll("[data-image]").forEach(el => {
+    const key = el.getAttribute("data-image");
+    const url = content[key];
+    if (url && url.trim() !== ""){
+      el.innerHTML = `<img src="${url.trim()}" alt="" loading="lazy">`;
+      el.classList.add("has-image");
+    }
+  });
+}
+
 // 將連結套用到頁面上所有 data-link 元素
 function applyLinks(links){
   document.querySelectorAll("[data-link]").forEach(el => {
@@ -82,6 +96,7 @@ async function loadSiteContent(){
     const data = await res.json();
     if (data.content) {
       applyContent(data.content);
+      applyImages(data.content);
       if (data.content["story-images"]) {
         const urls = data.content["story-images"].split(",").map(s => s.trim()).filter(Boolean);
         if (urls.length > 0) setupCarousel(urls);
