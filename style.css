@@ -309,6 +309,7 @@ img{ max-width: 100%; display:block; }
 .social-icon:hover{ opacity:1; transform: translateY(-2px); color:#fff; }
 .social-icon:hover .social-icon-label{ color:#fff; }
 .footer-copy{ text-align:center; font-size:0.78rem; margin-top:1.4rem; color: rgba(255,255,255,0.5); }
+.footer-credit{ text-align:center; font-size:0.7rem; margin-top:0.4rem; color: rgba(255,255,255,0.32); letter-spacing:0.03em; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 860px){
