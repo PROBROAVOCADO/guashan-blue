@@ -2,9 +2,9 @@
    卦山藍 Guashan Blue — script.js
    ========================================= */
 
-// ⚠️ 之後架好 GAS Web App 後，把網址貼在這裡即可自動生效
-// 範例：const GAS_URL = "https://script.google.com/macros/s/xxxxx/exec";
-const GAS_URL = "https://script.google.com/macros/s/AKfycbxnyhzKR2JN3G1f_nosQm9M8DhsXpqKrnwFcSajrQxaNCsmSScYdek8-Ljp6Kyrcrc/exec"; // 尚未設定，先留空
+// 原試算表的 GAS Web App 網址；這裡使用 /exec，不是試算表共享網址。
+// A 欄可使用 content-keys.js 中的中文名稱；程式仍相容既有英文欄位。
+const GAS_URL = "https://script.google.com/macros/s/AKfycbxnyhzKR2JN3G1f_nosQm9M8DhsXpqKrnwFcSajrQxaNCsmSScYdek8-Ljp6Kyrcrc/exec";
 
 // 本機預設內容：GAS 還沒接上前，網站會先顯示這裡的文字/連結
 // 之後這些值都會被 Google 試算表的內容取代
@@ -82,9 +82,9 @@ function applyLinks(links){
   });
 }
 
-// 從試算表內容中，把所有 story-image-1、story-image-2... 的欄位抓出來，
+// A 欄的「果園照片1、果園照片2…」會先對應為 story-image-1、story-image-2…，
 // 依數字順序排好，回傳網址陣列給輪播使用。
-// 之後要加照片，直接在試算表 A 欄接著往下加 story-image-4、story-image-5...
+// 之後要加照片，在「品牌故事」分頁 A 欄接著新增「果園照片8、果園照片9…」，
 // 不用改這裡的程式碼。
 function getStoryImageUrls(content){
   return Object.keys(content)
@@ -110,19 +110,20 @@ async function loadSiteContent(){
     const res = await fetch(GAS_URL);
     const data = await res.json();
     if (data.content) {
-      applyContent(data.content);
-      applyImages(data.content);
-      const urls = getStoryImageUrls(data.content);
+      const content = SITE_CONTENT_KEYS.normalize(data.content);
+      applyContent(content);
+      applyImages(content);
+      const urls = getStoryImageUrls(content);
       if (urls.length > 0) setupCarousel(urls);
     }
-    if (data.links) applyLinks(data.links);
+    if (data.links) applyLinks(SITE_CONTENT_KEYS.normalize(data.links));
   }catch(err){
     console.warn("讀取 Google 試算表內容失敗，改用預設內容：", err);
   }
 }
 
 // 果園照片輪播
-// 之後若試算表裡填了 story-image-1、story-image-2...(每列一張)，
+// 試算表「品牌故事」分頁填寫「果園照片1、果園照片2…」（每列一張），
 // 會自動把預留位置換成真實照片；沒有填就繼續顯示灰色預留框。
 function setupCarousel(imageUrls){
   const carousel = document.getElementById("storyCarousel");
