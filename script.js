@@ -146,9 +146,7 @@ function getLocationConfig(content){
   return { visible: true, address, label: label || "開啟 Google Maps 導航", directionsUrl: directions.href, mapUrl: map.href, searchUrl:search.href };
 }
 
-let cleanupLocationMap = () => {};
 function applyLocation(content){
-  cleanupLocationMap();
   const section = document.getElementById("location");
   if (!section) return;
   const config = getLocationConfig(content);
@@ -156,7 +154,6 @@ function applyLocation(content){
   const address = document.getElementById("locationAddress");
   const directions = document.getElementById("locationDirections");
   const external = document.getElementById("locationMapLink");
-  const status = document.getElementById("mapStatus");
   section.hidden = !config.visible;
   document.querySelectorAll("[data-location-nav]").forEach(el => { el.hidden = !config.visible; });
   if (!config.visible){
@@ -172,12 +169,8 @@ function applyLocation(content){
   directions.textContent = config.label;
   directions.href = config.directionsUrl;
   external.href = config.searchUrl;
-  status.hidden = false;
-  status.textContent = "正在載入 Google 地圖…若未顯示，請點下方開啟地圖。";
   frame.title = "卦山藍園區位置：" + config.address;
-  // iframe 的跨來源內容無法可靠判斷成功；保留獨立地圖連結，不以 load 事件宣稱成功。
-  const timer = setTimeout(() => { status.textContent = "地圖未顯示？可直接開啟 Google Maps 查看位置。"; }, 12000);
-  cleanupLocationMap = () => clearTimeout(timer);
+  // 跨來源地圖無法可靠判斷成功；地址旁保留獨立入口，不顯示常駐錯誤提示。
   frame.src = config.mapUrl;
 }
 
