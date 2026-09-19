@@ -5,10 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bagua Blueberry | 卦山藍-藍莓農場</title>
 <meta name="description" content="卦山藍，種在八卦山裡的藍莓園。清甜多汁的鮮採藍莓，歡迎前往訂購與預約專頁。">
+<link rel="canonical" href="https://baguablueberry.com/">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#33415C">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:site_name" content="卦山藍">
+<meta property="og:title" content="卦山藍｜八卦山藍莓農場">
+<meta property="og:description" content="卦山藍，種在八卦山裡的藍莓園。清甜多汁的鮮採藍莓，歡迎前往訂購與預約專頁。">
+<meta property="og:url" content="https://baguablueberry.com/">
+<meta property="og:image" content="https://baguablueberry.com/assets/share-logo.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1181">
+<meta property="og:image:height" content="1181">
+<meta property="og:image:alt" content="卦山藍品牌標誌：紅日、山形與藍莓">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="卦山藍｜八卦山藍莓農場">
+<meta name="twitter:description" content="來自八卦山的清甜藍莓，歡迎訂購與預約採果。">
+<meta name="twitter:image" content="https://baguablueberry.com/assets/share-logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20260919">
 </head>
 <body>
 
@@ -21,12 +42,13 @@
     </a>
     <nav class="nav" id="nav">
       <a href="#story">品牌故事</a>
-      <a href="#products">產品</a>
+      <a href="#products" data-products-nav hidden>產品</a>
       <a href="#faq">常見問題</a>
+      <a href="#location" data-location-nav hidden>我們在哪裡</a>
       <a href="#contact">聯絡我們</a>
     </nav>
     <a href="#" class="btn btn-primary btn-small" data-link="order-url" target="_blank" rel="noopener">立即訂購</a>
-    <button class="nav-toggle" id="navToggle" aria-label="開啟選單">
+    <button class="nav-toggle" id="navToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -62,9 +84,10 @@
           <div class="carousel-slide"><div class="image-placeholder"><span>果園照片 3</span></div></div>
           <div class="carousel-slide"><div class="image-placeholder"><span>果園照片 4</span></div></div>
         </div>
-        <button class="carousel-arrow prev" id="storyPrev" aria-label="上一張照片">‹</button>
-        <button class="carousel-arrow next" id="storyNext" aria-label="下一張照片">›</button>
+        <button class="carousel-arrow prev" id="storyPrev" aria-label="上一張照片" hidden>‹</button>
+        <button class="carousel-arrow next" id="storyNext" aria-label="下一張照片" hidden>›</button>
         <div class="carousel-dots" id="storyDots"></div>
+        <button class="carousel-pause" id="storyPause" aria-label="暫停照片輪播" hidden>暫停</button>
       </div>
     </div>
     <div class="story-text">
@@ -98,23 +121,23 @@
 </div>
 
 <!-- ===== 產品 ===== -->
-<section class="products" id="products">
+<section class="products" id="products" hidden>
   <p class="eyebrow center">· 產品</p>
   <h2 class="center" data-content="products-title">卦山藍的果實</h2>
   <div class="product-grid">
-    <article class="product-card">
+    <article class="product-card" data-product="1">
       <div class="image-placeholder small" data-image="product-1-image"><span>商品照片</span></div>
       <h3 data-content="product-1-title">鮮採藍莓</h3>
       <p data-content="product-1-desc">產季限定，每週採收直送，顆顆飽滿多汁。</p>
       <a href="#" class="btn btn-outline btn-small" data-link="order-url" target="_blank" rel="noopener">前往訂購</a>
     </article>
-    <article class="product-card">
+    <article class="product-card" data-product="2">
       <div class="image-placeholder small" data-image="product-2-image"><span>商品照片</span></div>
       <h3 data-content="product-2-title">藍莓加工品</h3>
       <p data-content="product-2-desc">果醬、果乾等加工品，延續產季外的好滋味。</p>
       <a href="#" class="btn btn-outline btn-small" data-link="order-url" target="_blank" rel="noopener">前往訂購</a>
     </article>
-    <article class="product-card">
+    <article class="product-card" data-product="3">
       <div class="image-placeholder small" data-image="product-3-image"><span>商品照片</span></div>
       <h3 data-content="product-3-title">園區採果體驗</h3>
       <p data-content="product-3-desc">親自走進果園，體驗現採現吃的樂趣。</p>
@@ -177,6 +200,26 @@
 
 <!-- ===== Footer ===== -->
 <footer class="site-footer" id="contact">
+  <section class="location-section" id="location" aria-labelledby="locationTitle" hidden>
+    <div class="location-card">
+      <div class="location-map">
+        <p class="map-status" id="mapStatus" role="status">正在載入 Google 地圖…</p>
+        <iframe id="locationMap" title="卦山藍園區位置地圖" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <a class="map-external" id="locationMapLink" target="_blank" rel="noopener noreferrer">在 Google Maps 查看地圖 ↗</a>
+      </div>
+      <div class="location-details">
+        <p class="eyebrow">· 來山裡找我們</p>
+        <h2 id="locationTitle">我們在哪裡</h2>
+        <p class="location-name">卦山藍藍莓農場</p>
+        <address class="location-address">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+          <a id="locationAddress" target="_blank" rel="noopener noreferrer"></a>
+        </address>
+        <a class="btn btn-primary" id="locationDirections" target="_blank" rel="noopener noreferrer">開啟 Google Maps 導航</a>
+        <p class="location-hint">導航路線以 Google Maps 提供為準。</p>
+      </div>
+    </div>
+  </section>
   <div class="footer-inner">
     <div class="footer-brand">
       <span class="logo-en">GUASHAN BLUE</span>
@@ -184,7 +227,7 @@
     </div>
     <div class="footer-links">
       <a href="#story">品牌故事</a>
-      <a href="#products">產品</a>
+      <a href="#products" data-products-nav hidden>產品</a>
       <a href="#faq">常見問題</a>
     </div>
     <div class="footer-contact">
@@ -217,7 +260,7 @@
   <p class="footer-credit">Site by Pro-Bro Avo</p>
 </footer>
 
-<script src="content-keys.js"></script>
-<script src="script.js"></script>
+<script src="content-keys.js?v=20260919"></script>
+<script src="script.js?v=20260919"></script>
 </body>
 </html>
