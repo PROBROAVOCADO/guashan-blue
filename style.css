@@ -13,7 +13,7 @@
   --mist:          #DCE2E0;   /* 果霜霧灰藍 */
   --mist-line:      rgba(38,42,34,0.12);
 
-  --font-display: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  --font-display: 'Huninn', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
   --font-body:    'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
 
   --radius: 4px;
@@ -40,7 +40,7 @@ h1,h2,h3{
   color: var(--indigo-dark);
   margin: 0 0 0.5em;
   line-height: 1.6;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.035em;
 }
 
@@ -103,7 +103,7 @@ img{ max-width: 100%; display:block; }
 }
 .logo{ display:flex; flex-direction:column; margin-right:auto; }
 .logo-en{ font-size:0.62rem; letter-spacing:0.24em; color: var(--sage); }
-.logo-zh{ font-family: var(--font-display); font-size:1.25rem; font-weight:600; letter-spacing:0.08em; color:var(--indigo-dark); }
+.logo-zh{ font-family: var(--font-display); font-size:1.25rem; font-weight:400; letter-spacing:0.08em; color:var(--indigo-dark); }
 
 .nav{ display:flex; gap: 1.8rem; }
 .nav a{ font-size:0.92rem; color: var(--ink-soft); }
@@ -247,7 +247,7 @@ img{ max-width: 100%; display:block; }
   border-top: 1px solid var(--mist-line);
 }
 .stat{ display:flex; flex-direction:column; }
-.stat-num{ font-family: var(--font-display); font-size:1.6rem; color: var(--plum); font-weight:500; }
+.stat-num{ font-family: var(--font-display); font-size:1.6rem; color: var(--plum); font-weight:400; }
 .stat-label{ font-size:0.8rem; color: var(--ink-soft); margin-top:0.2em; }
 
 /* ---------- Products ---------- */
@@ -280,7 +280,7 @@ img{ max-width: 100%; display:block; }
   width:100%; text-align:left; background:none; border:none; cursor:pointer;
   display:flex; justify-content:space-between; align-items:center;
   padding: 1.2rem 0; font-size:1rem; color: var(--indigo-dark); font-family: var(--font-display);
-  font-weight:500; line-height:1.75; gap:1rem;
+  font-weight:400; line-height:1.75; gap:1rem;
 }
 .faq-icon{ font-size:1.2rem; color: var(--sage); transition: transform 0.25s ease; }
 .faq-item.open .faq-icon{ transform: rotate(45deg); }
