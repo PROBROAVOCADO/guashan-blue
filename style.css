@@ -136,7 +136,7 @@ img{ max-width: 100%; display:block; }
 .hero .mountain-line path{ fill: var(--bg-paper); }
 
 .hero-inner{
-  max-width: 720px;
+  max-width: 1040px;
   margin: 0 auto;
   padding: 3rem 1.5rem 0;
   text-align:center;
@@ -146,8 +146,10 @@ img{ max-width: 100%; display:block; }
   color:#fff;
   font-size: clamp(2rem, 5vw, 3rem);
   margin-bottom:0.6em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
 }
-.hero-sub{ color: rgba(255,255,255,0.82); font-size:1.05rem; margin-bottom:2em; }
+.hero-sub{ max-width:720px; margin-inline:auto; color: rgba(255,255,255,0.82); font-size:1.05rem; margin-bottom:2em; }
 .hero-actions{ display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
 
 .bloom-texture{
